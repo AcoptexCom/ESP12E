@@ -8,7 +8,7 @@
 #include <ESP8266WiFi.h>
 
 const char* ssid = "TR-1";
-const char* password = "AQW125_*/;%&_jkh1364ADF12";
+const char* password = "12345";
 const char* host = "maker.ifttt.com";
 const char* iftttApiKey = "bHqghGuQv0nZhfaBKSVZ-v";//IFTTT API SECRET  KEY
 bool state = true;
