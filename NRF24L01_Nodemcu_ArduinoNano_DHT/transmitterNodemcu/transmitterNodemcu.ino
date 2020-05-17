@@ -12,15 +12,16 @@
 // Initialize DHT sensor.
 DHT dht(DHTPIN, DHTTYPE);
 
-float temperature[2];
- 
+float data[2];
+ // Hardware configuration
+// Set up nRF24L01 radio on pins D4 & D2 of Nodemcu
 RF24 radio(2, 4);
-const uint64_t pipe = 0xE8E8F0F0E1LL;
+const uint64_t pipe = 0xE8E8F0F0E1LL;// Radio pipe address for the 2 nodes to communicate.
  
 void setup(void) {
-  Serial.begin(9600);
-dht.begin();
-radio.begin();
+  Serial.begin(9600);//initialize serial communication at 9600 bps
+dht.begin();//  Setup and configure dht sensor
+radio.begin();// Setup and configure rf radiO
 radio.openWritingPipe(pipe);
 }
  
@@ -47,8 +48,9 @@ void loop(void)
   Serial.print("Humidity: ");
   Serial.println(h);
 
-temperature[0] = t;
-temperature[1] = h;
-radio.write(temperature, sizeof(temperature));
+data[0] = t;//temperature in Celsius 
+//data[0] = f;//temperature in Fahrenheit 
+data[1] = h;//humidity
+radio.write(data, sizeof(data));//sending data
 delay(500);
 }
